@@ -48,14 +48,6 @@ int GetUniformRandomNumber(int lower, int upper) {
     return r + lower;
 }
 
-void DisplayRandomNumbers(size_t n, int lower, int upper) {
-    int r;
-    for (unsigned int i=0; i < n; i++){
-        r = GetUniformRandomNumber(lower,upper);
-        printf("random number %d: %d\n", i, r);
-    }
-}
-
 int main() {
     // seed the PRNG
     srand(time(NULL));
