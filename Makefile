@@ -2,7 +2,7 @@
 
 CC = gcc
 
-OBJS = tcp_client.o tcp_server.o
+OBJS = main.o
 
 all: main
 

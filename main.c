@@ -7,7 +7,8 @@
 #define HEIGHT 10
 
 #define MOD(X,Y) ((X) - (((X)/(Y))*(Y)))
-
+#define MAX(X,Y) (((X)>(Y))?(X):(Y))
+#define MIN(X,Y) (((X)<(Y))?(X):(Y))
 
 static size_t LENGTH = WIDTH*HEIGHT;
 
