@@ -2,17 +2,17 @@
 
 CC = gcc
 
-OBJS = main.o
+OBJS = minesweeper.o
 
-all: main
+all: minesweeper
 
-main: main.o
-	$(CC) -o $@ main.o
+minesweeper: minesweeper.o
+	$(CC) -o $@ minesweeper.o
 
-main.o: main.c
-	$(CC) -c main.c
+minesweeper.o: minesweeper.c
+	$(CC) -c minesweeper.c
 
 .PHONY: clean
 
 clean:
-	rm -f $(OBJS) main
+	rm -f $(OBJS) minesweeper
