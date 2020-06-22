@@ -32,7 +32,7 @@ void InitializeState(char* state, size_t width, size_t height, size_t nMines, si
     size_t length = width*height;
     for (size_t i=0L; i<length; i++)
         state[i] = 0;
-    for (size_t placedMines = 0; placedMines<nMines;)
+    for (size_t placedMines = 0L; placedMines<nMines;)
     {
         int minePos = GetUniformRandomInt(0, length-1);
         if (state[minePos])
@@ -80,7 +80,7 @@ void RevealState(char* state, char* observation, size_t width, size_t height) {
     size_t length = height*width;
     int dummy = 0;
     int *dummyAddr = &dummy;
-    for (size_t i = 0; i<length; i++) {
+    for (size_t i = 0L; i<length; i++) {
         if (observation[i] == UNREVEALED){
             RevealCell(i, state, observation, width, height, dummyAddr);
         }
@@ -88,14 +88,18 @@ void RevealState(char* state, char* observation, size_t width, size_t height) {
 }
 
 void PrintState(char* state, size_t width, size_t height) {
-    printf("   ");
-    for (size_t i = 0; i < width; i++) {
-        printf("%ld)", i);
+    printf("    ");
+    for (size_t i = 0L; i < width; i++) {
+        printf("%ld)", i+1);
     }
     printf("\n");
-    for (size_t i = 0; i < width; i++) {
-        printf("%ld)",i);
-        for (size_t j = 0; j < height; j ++) {
+    for (size_t i = 0L; i < width; i++) {
+        //TODO handle more elegantly (get rid of special case by using printf better)
+        if (i<9)
+            printf("%ld) ",i+1L);
+        else
+            printf("%ld)",i+1L);
+        for (size_t j = 0L; j < height; j ++) {
             char symbol = ('0')+state[i*width + j];
             if (symbol == '0')
                 symbol = ' ';
@@ -165,7 +169,7 @@ unsigned int GetCellFromUserInput() {
     scanf("%s", userInput);
     unsigned int column = ParseStringToNumber(userInput);
     unsigned int cell = row*WIDTH + column;
-    return cell;
+    return cell-1;
 }
 
 
@@ -173,7 +177,6 @@ int main() {
     // seed the PRNG
     srand(time(NULL));
     int nReveals = 0;
-    int* nRevealsAddr = &nReveals;
 
     char state[LENGTH];
     char observation[LENGTH];
@@ -184,7 +187,7 @@ int main() {
     PrintState(observation, WIDTH, HEIGHT);
     unsigned int cell = GetCellFromUserInput();
     InitializeState(state, WIDTH, HEIGHT, N_MINES, cell);
-    RevealCell(cell, state, observation, WIDTH, HEIGHT, nRevealsAddr);
+    RevealCell(cell, state, observation, WIDTH, HEIGHT, &nReveals);
 
     while(nReveals < (LENGTH - N_MINES)) {
         //TODO handle rows and columns out of bounds
@@ -197,7 +200,7 @@ int main() {
             printf("you are dead\n");
             return 0;
         }
-        RevealCell(cell, state, observation, WIDTH, HEIGHT, nRevealsAddr);
+        RevealCell(cell, state, observation, WIDTH, HEIGHT, &nReveals);
     }
     system("clear");
     PrintState(state, WIDTH, HEIGHT);
