@@ -4,10 +4,12 @@ CC = gcc
 
 OBJS = minesweeper.o
 
+CFLAGS = -O3 -Wall
+
 all: minesweeper
 
 minesweeper: minesweeper.o
-	$(CC) -o $@ minesweeper.o
+	$(CC) $(CFLAGS) -o $@ minesweeper.o -march=native
 
 minesweeper.o: minesweeper.c
 	$(CC) -c minesweeper.c

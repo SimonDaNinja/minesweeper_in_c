@@ -199,6 +199,8 @@ int main() {
         }
         RevealCell(cell, state, observation, WIDTH, HEIGHT, nRevealsAddr);
     }
+    system("clear");
+    PrintState(state, WIDTH, HEIGHT);
     printf("congratulations, you won!\n");
     return 0;
 }
