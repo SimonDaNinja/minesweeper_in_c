@@ -97,6 +97,8 @@ void PrintState(char* state, size_t width, size_t height) {
         printf("%ld)",i);
         for (size_t j = 0; j < height; j ++) {
             char symbol = ('0')+state[i*width + j];
+            if (symbol == '0')
+                symbol = ' ';
             printf(" %c",symbol);
         }
         printf("\n");
