@@ -164,12 +164,12 @@ unsigned int GetCellFromUserInput() {
     char userInput[128];
     printf("select row: ");
     scanf("%s", userInput);
-    unsigned int row = ParseStringToNumber(userInput);
+    unsigned int row = ParseStringToNumber(userInput)-1;
     printf("select column: ");
     scanf("%s", userInput);
-    unsigned int column = ParseStringToNumber(userInput);
+    unsigned int column = ParseStringToNumber(userInput)-1;
     unsigned int cell = row*WIDTH + column;
-    return cell-1;
+    return cell;
 }
 
 
